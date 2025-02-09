@@ -1,0 +1,24 @@
+﻿@model List<Subject>
+
+<link href="~/css/table.css" rel="stylesheet" />
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Subject" asp-action="Create">Add new Course</a>
+<table>
+    <tr>
+        <th>Subject Name</th>
+        <th>subject Capacity</th>
+        <th>Delete</th>
+    </tr>
+
+
+    @foreach (Subject subject in Model)
+    {
+        <tr>
+            <td>@subject.subjectName</td>
+            <td>@subject.subjectCapacity</td>
+            <td>
+                <a href="/Subject/Delete/@subject.subjectId">Delete @subject.subjectName</a>
+            </td>
+        </tr>
+    }
+</table>
