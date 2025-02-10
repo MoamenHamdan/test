@@ -57,6 +57,7 @@ namespace School.Controllers
             };
 
 
+            stuednt.PhotoName = guid + StudentPhoto.FileName;
 
             _studentRepository.create(stuednt);
             List<Student> students = _studentRepository.GetStudents();

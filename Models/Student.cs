@@ -21,6 +21,8 @@ namespace School.Models
 
         public bool isActive { get; set; }
 
+        public string PhotoName { get; set; }
+
        
     }
 }

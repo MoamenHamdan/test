@@ -7,6 +7,7 @@
     <tr>
         <th>Student Name</th>
         <th>Student Age</th>
+        <th>Student Image</th>
         <th>Delete</th>
     </tr>
 
@@ -16,6 +17,9 @@
         <tr>
             <td>@student.studentName</td>
             <td>@student.studentAge</td>
+            <td>
+                <img src="~/StudentPic/@student.PhotoName" width="50" height="50m">
+            </td>
             <td>
                 <a href="/Student/Delete/@student.studentId">Delete @student.studentName</a>
             </td> 
