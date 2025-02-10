@@ -1,1 +1,128 @@
-﻿
+﻿@using School.Models.NewFolder2
+
+@model School.Models.NewFolder2.StudentCourseVM
+<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Back to Home </a>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 15px 20px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            z-index: 1000;
+        }
+
+            .navbar a {
+                text-decoration: none;
+                color: black;
+                margin: 0 10px;
+                font-weight: bold;
+            }
+
+        /* Main Content */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            padding-top: 60px; /* Adjust for navbar space */
+        }
+
+        /* .container { */
+        /*     background: white; */
+        /*     padding: 20px; */
+        /*     border-radius: 10px; */
+        /*     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        /*     width: 400px; */
+        /*     text-align: center; */
+        /*     margin-top: 50px; /* Push down from navbar */ */
+        /* } */
+
+        h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            button:hover {
+                background: #218838;
+            }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Register for Courses</h2>
+
+        <form action="Register" method="POST">
+            <label for="students">Select Student:</label>
+            <select id="students" name="studentId">
+                @foreach (Student student in Model.s)
+                {
+                    <option value="@student.studentId ">@student.studentName</option>
+
+                }
+
+            </select>
+
+            <label for="courses">Select Course:</label>
+            <select id="courses" name="subjectId">
+                @foreach(Subject course in Model.c){
+                    <option value="@course.subjectId">@course.subjectName</option>
+                }              
+                
+            </select>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+</body>
+</html>

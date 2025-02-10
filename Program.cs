@@ -16,6 +16,7 @@ builder.Services.AddTransient<IStudentRepository, StudentRepository>();
 builder.Services.AddTransient<ITeacherRepository, TeacherRepository>();
 builder.Services.AddTransient<IRoomRepository, RoomRepository>();
 builder.Services.AddTransient<ISubjectRepository, SubjectRepository>();
+builder.WebHost.UseWebRoot("wwwroot"); 
 
 
 

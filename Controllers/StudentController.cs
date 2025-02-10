@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using School.Models;
+using School.Models.NewFolder2;
 using School.Repository;
 
 namespace School.Controllers
@@ -8,10 +9,14 @@ namespace School.Controllers
     {
 
         private readonly IStudentRepository _studentRepository;
+        private readonly ISubjectRepository _subjectRepository;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public StudentController(IStudentRepository studentRepository)
+        public StudentController(IStudentRepository studentRepository, ISubjectRepository subjectRepository, IWebHostEnvironment hostEnvironment)
         {
             _studentRepository = studentRepository;
+            _subjectRepository = subjectRepository;
+            _hostEnvironment = hostEnvironment;
         }
 
 
@@ -39,8 +44,20 @@ namespace School.Controllers
 
         //Create a new Student
         [HttpPost]
-        public ActionResult Create(Student stuednt)
+        public ActionResult Create(Student stuednt,IFormFile StudentPhoto)
         {
+            var wwwrootPath = _hostEnvironment.WebRootPath + "/StudentPic/";
+            Guid guid = Guid.NewGuid();
+
+            string fullPath = System.IO.Path.Combine(wwwrootPath, guid + StudentPhoto.FileName );
+
+            using (var fileStream = new FileStream(fullPath, FileMode.Create))
+            {
+                StudentPhoto.CopyTo(fileStream);
+            };
+
+
+
             _studentRepository.create(stuednt);
             List<Student> students = _studentRepository.GetStudents();
             return View("Index", students);
@@ -58,7 +75,11 @@ namespace School.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            StudentCourseVM studentCourseVM = new StudentCourseVM();
+            studentCourseVM.c = _subjectRepository.getAllSubject();
+            studentCourseVM.s = _studentRepository.GetStudents();
+            return View(studentCourseVM);
+             
         }
 
 
@@ -66,7 +87,7 @@ namespace School.Controllers
         public ActionResult Register(int studentId, int subjectId)
         {
             _studentRepository.register(studentId, subjectId);
-            return View();
+            return RedirectToAction("Register");
 
         }
 

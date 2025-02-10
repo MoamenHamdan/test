@@ -93,7 +93,7 @@
     <div class="navbar">School Management</div>
 
     <div class="container">
-        <form action="Create" method="POST">
+        <form action="Create" method="POST" enctype="multipart/form-data">
             <label for="name">Name:</label>
             <input type="text" id="name" name="studentName" placeholder="Student's Name.." required>
 
@@ -102,6 +102,9 @@
 
             <label>IsActive:</label>
             <input type="checkbox" id="isactive" name="isActive" value="true" checked>
+
+            <label>Student Photo:</label>
+            <input type="file" name="StudentPhoto" />
 
             <button type="submit">Submit</button>
         </form>
